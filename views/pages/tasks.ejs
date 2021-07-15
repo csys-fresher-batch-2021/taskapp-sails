@@ -1,0 +1,17 @@
+<h3>All Tasks</h3>
+
+<div id="tasks">
+
+</div>
+
+<script>
+  function loadTasks() {
+    let url = "api/tasks";
+    axios.get(url).then(res => {
+      console.log(res.data);
+      let tasks = res.data;
+      document.querySelector("#tasks").innerHTML = JSON.stringify(tasks);
+    });
+  }
+  loadTasks();
+</script>

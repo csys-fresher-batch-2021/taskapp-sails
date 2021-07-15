@@ -1,0 +1,16 @@
+module.exports = async function (req, res, proceed) {
+  console.log(req.query);
+  let loggedInUserId = req.query.loggedInUserId;
+  if (loggedInUserId) {
+    try {
+      // await UserValidator.isUser(loggedInUserId);
+      req.me = loggedInUserId;
+      return proceed();
+    } catch (err) {
+      console.log(err);
+      res.status(401).json({ message: err.message });
+    }
+  } else {
+    res.status(401).json({ message: 'Unauthorized' });
+  }
+}

@@ -1,0 +1,19 @@
+<h3>My Tasks</h3>
+
+<div id="tasks">
+
+</div>
+
+<script>
+  function loadTasks() {
+    let user = JSON.parse(localStorage.getItem("LOGGED_IN_USER"));
+    let url = "api/tasks";
+    axios.get(url).then(res => {
+      console.log(res.data);
+      let tasks = res.data;
+      let myTasks = tasks.filter(obj=>obj.createdBy == user.id);
+      document.querySelector("#tasks").innerHTML = JSON.stringify(myTasks);
+    });
+  }
+  loadTasks();
+</script>
